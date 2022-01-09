@@ -1,6 +1,8 @@
 ---
 - name: Play name
   hosts: all
+  become_user: ec2-user
+  become: yes
   tasks:
     - name: Selenoid | Run CM container, download browser images and run selenoid
       docker_container:
@@ -24,4 +26,3 @@
             --vnc
             --tmpfs 512
             --force
-s
