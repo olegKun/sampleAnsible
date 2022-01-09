@@ -1,0 +1,5 @@
+[all:vars]
+ansible_ssh_private_key_file=kvp.pem
+ansible_user=ec2-user
+[ggr]
+54.172.74.62
