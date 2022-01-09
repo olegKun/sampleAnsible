@@ -1,0 +1,27 @@
+---
+- name: Play name
+  hosts: all
+  tasks:
+    - name: Selenoid | Run CM container, download browser images and run selenoid
+      docker_container:
+        name: cm
+        image: 'aerokube/cm:1.7.1'
+        state: started
+        pull: true
+        recreate: true
+        restart: true
+        restart_policy: unless-stopped
+        timeout: 600
+        volumes:
+          - '/var/run/docker.sock:/var/run/docker.sock'
+          - '/etc/selenoid:/root'
+        env:
+          OVERRIDE_HOME: '/etc/selenoid'
+        command: >
+          selenoid start
+            --last-versions 3
+            --args '-limit 15'
+            --vnc
+            --tmpfs 512
+            --force
+s
